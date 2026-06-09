@@ -21,7 +21,7 @@ function propToZod(prop: JsonSchemaProp): ZodTypeAny {
 }
 
 function buildObject(schema: JsonSchemaProp): ZodTypeAny {
-  if (!schema.properties) return z.record(z.unknown())
+  if (!schema.properties) return z.record(z.string(), z.unknown())
   const required = new Set(schema.required ?? [])
   const shape: Record<string, ZodTypeAny> = {}
   for (const [key, prop] of Object.entries(schema.properties)) {
