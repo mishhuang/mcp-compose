@@ -1,6 +1,6 @@
 import { Client } from '@modelcontextprotocol/sdk/client/index.js'
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js'
-import { SSEClientTransport } from '@modelcontextprotocol/sdk/client/sse.js'
+import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js'
 import { ZodError } from 'zod'
 import type { ServerConfig, ComposedClientConfig, ToolDefinition } from './types.js'
 import { Router } from './router.js'
@@ -103,7 +103,10 @@ export class ComposedClient {
       const transport = new StdioClientTransport({ command: config.command, args: config.args })
       await client.connect(transport)
     } else {
-      const transport = new SSEClientTransport(new URL(config.url))
+      const transport = new StreamableHTTPClientTransport(
+        new URL(config.url),
+        config.headers ? { requestInit: { headers: config.headers } } : undefined,
+      )
       await client.connect(transport)
     }
 
