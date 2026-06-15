@@ -160,4 +160,18 @@ describe('ComposedClient', () => {
       expect(client.getPipeline()).toBe(pipeline)
     })
   })
+
+  describe('callTool() generic type parameter', () => {
+    it('returns the typed result without a cast at the call site', async () => {
+      type PingResult = { content: [{ type: string; text: string }] }
+      const expected: PingResult = { content: [{ type: 'text', text: 'pong' }] }
+      const mock = makeMockClient([{ name: 'ping' }], expected)
+      const client = new ComposedClient({
+        servers: [{ name: 'srv', type: 'client', client: mock }],
+      })
+      await client.connect()
+      const result = await client.callTool<PingResult>('ping', {})
+      expect(result.content[0].text).toBe('pong')
+    })
+  })
 })

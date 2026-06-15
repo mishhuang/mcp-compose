@@ -59,7 +59,7 @@ export class ComposedClient {
     return this.router.listTools()
   }
 
-  async callTool(name: string, args: Record<string, unknown>): Promise<unknown> {
+  async callTool<T = unknown>(name: string, args: Record<string, unknown>): Promise<T> {
     const serverName = this.router.resolve(name)
     const tool = this.router.listTools().find(t => t.name === name)!
 
@@ -83,7 +83,7 @@ export class ComposedClient {
       ctx.result = await mcpClient.callTool({ name, arguments: args })
     })
 
-    return ctx.result
+    return ctx.result as T
   }
 
   getRouter(): Router {
