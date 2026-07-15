@@ -80,7 +80,7 @@ export class ComposedClient {
 
     const mcpClient = this.clients.get(serverName)!
     await this.pipeline.execute(ctx, async () => {
-      ctx.result = await mcpClient.callTool({ name, arguments: args })
+      ctx.result = await mcpClient.callTool({ name, arguments: ctx.args })
     })
 
     return ctx.result as T
