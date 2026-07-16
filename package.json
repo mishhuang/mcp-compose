@@ -34,7 +34,7 @@
   "sideEffects": false,
   "keywords": ["mcp", "model-context-protocol", "typescript", "sdk"],
   "author": "Michelle Huang <mhuang987@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/mishhuang/mcp-compose/issues"
   },
