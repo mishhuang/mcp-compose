@@ -3,12 +3,23 @@ import type { ZodTypeAny } from 'zod'
 
 type JsonSchemaProp = {
   type?: string
+  enum?: unknown[]
   items?: JsonSchemaProp
   properties?: Record<string, JsonSchemaProp>
   required?: string[]
 }
 
 function propToZod(prop: JsonSchemaProp): ZodTypeAny {
+  if (prop.enum !== undefined) {
+    const vals = prop.enum
+    if (vals.length === 0) return z.never()
+    if (vals.length === 1) return z.literal(vals[0] as string | number | boolean)
+    if (vals.every((v): v is string => typeof v === 'string')) {
+      return z.enum(vals as [string, ...string[]])
+    }
+    const literals = vals.map(v => z.literal(v as string | number | boolean))
+    return z.union(literals as [ZodTypeAny, ZodTypeAny, ...ZodTypeAny[]])
+  }
   switch (prop.type) {
     case 'string':  return z.string()
     case 'number':  return z.number()

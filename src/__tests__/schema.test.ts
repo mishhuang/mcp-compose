@@ -80,4 +80,14 @@ describe('jsonSchemaToZod', () => {
     expect(() => schema.parse({})).not.toThrow()
     expect(() => schema.parse({ anything: 'goes' })).not.toThrow()
   })
+
+  it('validates string enum properties', () => {
+    const schema = jsonSchemaToZod({
+      type: 'object',
+      properties: { order: { type: 'string', enum: ['asc', 'desc'] } },
+      required: ['order'],
+    })
+    expect(() => schema.parse({ order: 'asc' })).not.toThrow()
+    expect(() => schema.parse({ order: 'invalid' })).toThrow()
+  })
 })
