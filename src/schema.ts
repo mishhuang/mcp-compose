@@ -18,7 +18,7 @@ function propToZod(prop: JsonSchemaProp): ZodTypeAny {
       return z.enum(vals as [string, ...string[]])
     }
     const literals = vals.map(v => z.literal(v as string | number | boolean))
-    return z.union(literals as [ZodTypeAny, ZodTypeAny, ...ZodTypeAny[]])
+    return z.union(literals as unknown as [ZodTypeAny, ZodTypeAny, ...ZodTypeAny[]])
   }
   switch (prop.type) {
     case 'string':  return z.string()
