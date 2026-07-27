@@ -11,7 +11,7 @@ npm install @mishhuang/mcp-compose
 ## Quick start
 
 ```typescript
-import { ComposedClient } from 'mcp-compose'
+import { ComposedClient } from '@mishhuang/mcp-compose'
 
 const client = new ComposedClient({
   servers: [
@@ -117,7 +117,7 @@ client.getPipeline().use(async (ctx, next) => {
 `callTool` validates arguments against the tool's `inputSchema` using Zod before dispatching the call. If validation fails, a `ToolValidationError` is thrown — the MCP server is never called.
 
 ```typescript
-import { ToolValidationError } from 'mcp-compose'
+import { ToolValidationError } from '@mishhuang/mcp-compose'
 
 try {
   await client.callTool('greet', {}) // missing required field 'name'
@@ -141,7 +141,7 @@ try {
 For full control, pass a pre-built `Router` and `MiddlewarePipeline` directly:
 
 ```typescript
-import { ComposedClient, Router, MiddlewarePipeline } from 'mcp-compose'
+import { ComposedClient, Router, MiddlewarePipeline } from '@mishhuang/mcp-compose'
 
 const router = new Router({ defaultStrategy: 'first-wins' })
 const pipeline = new MiddlewarePipeline()
