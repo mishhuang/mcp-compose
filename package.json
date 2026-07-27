@@ -30,7 +30,8 @@
     "type": "git",
     "url": "git+https://github.com/mishhuang/mcp-compose.git"
   },
-  "engines": { "node": ">=22" },
+  "engines": { "node": ">=22.6" },
+  "publishConfig": { "access": "public" },
   "sideEffects": false,
   "keywords": ["mcp", "model-context-protocol", "typescript", "sdk"],
   "author": "Michelle Huang <mhuang987@gmail.com>",
