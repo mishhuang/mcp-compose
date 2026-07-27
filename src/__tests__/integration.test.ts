@@ -21,16 +21,18 @@ describe('ComposedClient — stdio integration', () => {
 
     await client.connect()
 
-    const tools = client.listTools()
-    expect(tools).toHaveLength(1)
-    expect(tools[0].name).toBe('echo')
-    expect(tools[0].serverName).toBe('echo')
+    try {
+      const tools = client.listTools()
+      expect(tools).toHaveLength(1)
+      expect(tools[0].name).toBe('echo')
+      expect(tools[0].serverName).toBe('echo')
 
-    const result = await client.callTool('echo', { message: 'hello' }) as {
-      content: Array<{ type: string; text: string }>
+      const result = await client.callTool('echo', { message: 'hello' }) as {
+        content: Array<{ type: string; text: string }>
+      }
+      expect(result.content[0].text).toBe('hello')
+    } finally {
+      await client.disconnect()
     }
-    expect(result.content[0].text).toBe('hello')
-
-    await client.disconnect()
   }, 15000)
 })
