@@ -18,3 +18,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Transport support: `stdio` (subprocess), `http` (StreamableHTTP), and pre-built `client` instances
 - Generic `callTool<T>()` for typed return values without a cast at the call site
 - Dual CJS/ESM output with full TypeScript declarations
+
+[Unreleased]: https://github.com/mishhuang/mcp-compose/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/mishhuang/mcp-compose/releases/tag/v1.0.0
