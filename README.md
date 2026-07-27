@@ -5,7 +5,7 @@ A TypeScript SDK for composing and routing across multiple MCP servers with type
 ## Install
 
 ```bash
-npm install mcp-compose
+npm install @mishhuang/mcp-compose
 ```
 
 ## Quick start
