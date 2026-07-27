@@ -1,0 +1,21 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": [
+              "-e",
+              "const c=[];process.stdin.on('data',d=>c.push(d));process.stdin.on('end',()=>{const i=JSON.parse(Buffer.concat(c));const f=(i.tool_input||{}).file_path||'';if(!/\\.ts$/.test(f))return;const {spawnSync:s}=require('child_process');const r=s('npm',['run','typecheck'],{stdio:'inherit',shell:true});process.exit(r.status||0);});"
+            ],
+            "timeout": 30,
+            "statusMessage": "Typechecking..."
+          }
+        ]
+      }
+    ]
+  }
+}

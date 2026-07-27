@@ -98,6 +98,43 @@ describe('ComposedClient', () => {
       await expect(client.callTool('greet', {})).rejects.toThrow(ToolValidationError)
     })
 
+    it('ToolValidationError exposes zodError with field-level issues', async () => {
+      const mock = makeMockClient([{
+        name: 'greet',
+        inputSchema: {
+          type: 'object',
+          properties: { name: { type: 'string' } },
+          required: ['name'],
+        },
+      }])
+      const client = new ComposedClient({
+        servers: [{ name: 'srv', type: 'client', client: mock }],
+      })
+      await client.connect()
+      try {
+        await client.callTool('greet', {})
+        expect.fail('should have thrown')
+      } catch (err) {
+        expect(err).toBeInstanceOf(ToolValidationError)
+        const ve = err as ToolValidationError
+        expect(ve.zodError).toBeDefined()
+        expect(ve.zodError.issues.length).toBeGreaterThan(0)
+      }
+    })
+
+    it('sends ctx.args to the MCP server so middleware can replace args', async () => {
+      const mock = makeMockClient([{ name: 'ping' }])
+      const client = new ComposedClient({
+        servers: [{ name: 'srv', type: 'client', client: mock }],
+        middleware: [
+          async (ctx, next) => { ctx.args = { injected: true }; await next() },
+        ],
+      })
+      await client.connect()
+      await client.callTool('ping', {})
+      expect(mock.callTool).toHaveBeenCalledWith({ name: 'ping', arguments: { injected: true } })
+    })
+
     it('runs middleware before and after the tool call', async () => {
       const order: string[] = []
       const mock = makeMockClient([{ name: 'ping' }])
