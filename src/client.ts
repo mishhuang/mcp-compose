@@ -61,7 +61,7 @@ export class ComposedClient {
 
   async callTool<T = unknown>(name: string, args: Record<string, unknown>): Promise<T> {
     const serverName = this.router.resolve(name)
-    const tool = this.router.listTools().find(t => t.name === name)!
+    const tool = this.router.getTool(name)!
 
     try {
       tool.zodSchema.parse(args)

@@ -46,6 +46,10 @@ export class Router {
     return serverName
   }
 
+  getTool(toolName: string): ToolDefinition | undefined {
+    return this.toolDefs.get(toolName)
+  }
+
   listTools(): ToolDefinition[] {
     return Array.from(this.toolDefs.values())
   }
