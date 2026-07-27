@@ -1,5 +1,5 @@
 {
-  "name": "@mishhuang/mcp-compose",
+  "name": "@mhuang98/mcp-compose",
   "version": "1.0.0",
   "description": "A TypeScript SDK for composing and routing across multiple MCP servers with typed tools, middleware, and Zod validation",
   "type": "commonjs",

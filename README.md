@@ -5,13 +5,13 @@ A TypeScript SDK for composing and routing across multiple MCP servers with type
 ## Install
 
 ```bash
-npm install @mishhuang/mcp-compose
+npm install @mhuang98/mcp-compose
 ```
 
 ## Quick start
 
 ```typescript
-import { ComposedClient } from '@mishhuang/mcp-compose'
+import { ComposedClient } from '@mhuang98/mcp-compose'
 
 const client = new ComposedClient({
   servers: [
@@ -117,7 +117,7 @@ client.getPipeline().use(async (ctx, next) => {
 `callTool` validates arguments against the tool's `inputSchema` using Zod before dispatching the call. If validation fails, a `ToolValidationError` is thrown — the MCP server is never called.
 
 ```typescript
-import { ToolValidationError } from '@mishhuang/mcp-compose'
+import { ToolValidationError } from '@mhuang98/mcp-compose'
 
 try {
   await client.callTool('greet', {}) // missing required field 'name'
@@ -141,7 +141,7 @@ try {
 For full control, pass a pre-built `Router` and `MiddlewarePipeline` directly:
 
 ```typescript
-import { ComposedClient, Router, MiddlewarePipeline } from '@mishhuang/mcp-compose'
+import { ComposedClient, Router, MiddlewarePipeline } from '@mhuang98/mcp-compose'
 
 const router = new Router({ defaultStrategy: 'first-wins' })
 const pipeline = new MiddlewarePipeline()
