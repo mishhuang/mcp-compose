@@ -144,3 +144,6 @@ vite.config.ts.timestamp-*
 
 # Claude Code personal settings (project settings.json is committed)
 .claude/settings.local.json
+
+# Local planning and session notes
+docs/
