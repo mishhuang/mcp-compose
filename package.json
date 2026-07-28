@@ -33,7 +33,7 @@
   "engines": { "node": ">=22.6" },
   "publishConfig": { "access": "public" },
   "sideEffects": false,
-  "keywords": ["mcp", "model-context-protocol", "typescript", "sdk"],
+  "keywords": ["mcp", "model-context-protocol", "typescript", "sdk", "routing", "middleware", "compose", "zod"],
   "author": "Michelle Huang <mhuang987@gmail.com>",
   "license": "MIT",
   "bugs": {
