@@ -78,4 +78,21 @@ describe('Router', () => {
       expect(() => router.resolve('ghost')).toThrow(ToolNotFoundError)
     })
   })
+
+  describe('getTool()', () => {
+    it('returns the ToolDefinition for a registered tool', () => {
+      const router = new Router()
+      router.register('srv', [rawTool('ping')])
+      const tool = router.getTool('ping')
+      expect(tool).toBeDefined()
+      expect(tool!.name).toBe('ping')
+      expect(tool!.serverName).toBe('srv')
+      expect(tool!.zodSchema).toBeDefined()
+    })
+
+    it('returns undefined for an unknown tool name', () => {
+      const router = new Router()
+      expect(router.getTool('ghost')).toBeUndefined()
+    })
+  })
 })

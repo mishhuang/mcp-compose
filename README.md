@@ -170,6 +170,7 @@ const client = new ComposedClient({ servers: [...], router, pipeline })
 |---|---|
 | `register(serverName, tools)` | Register raw tools from a server |
 | `resolve(toolName)` | Return the server name for a tool, or throw `ToolNotFoundError` |
+| `getTool(toolName)` | Return the `ToolDefinition` for a tool, or `undefined` if not registered |
 | `listTools()` | Return all registered `ToolDefinition` objects |
 
 ### `MiddlewarePipeline`
